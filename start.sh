@@ -2,7 +2,7 @@
 original_wd=$(pwd);
 
 [ -n "$wipe" ] &&
-	rm -rf test-ledger solana-program-library node_modules package.json package-lock.json config;
+	rm -rf test-ledger solana-program-library js/node_modules js/package-lock.json config;
 
 # Check if we have what we need
 if
