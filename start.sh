@@ -111,20 +111,20 @@ if [ "$(solana balance $test_acc2_pub | grep -o \^[0-9]\*)" -lt 1 ]; then
 	fi;
 fi;
 if [ -z "$test_token1" ]; then
-	export test_token1=$(spl-token create-token | grep -oP '(?<=Creating token ).*');
+	export test_token1=$(spl-token create-token | grep -o 'Creating token .*' | cut -b 16- );
 	spl-token create-account $test_token1;
 	echo "export test_token1=$test_token1" >> config;
 fi;
 
 if [ -z "$test_token2" ]; then
-	export test_token2=$(spl-token create-token | grep -oP '(?<=Creating token ).*');
+	export test_token2=$(spl-token create-token | grep -o 'Creating token .*' | cut -b 16- );
 	spl-token create-account $test_token2;
 	echo "export test_token2=$test_token2" >> config;
 fi;
 
 echo "start.sh: Test token mint 1 is $test_token1";
 echo "start.sh: Test token mint 2 is $test_token2";
-export test_token_program=$(solana account $test_token1 | grep -oP '(?<=Owner\: ).*');
+export test_token_program=$(solana account $test_token1 | grep -o 'Owner\: .*' | cut -b 8- );
 echo "start.sh: Token program is $test_token_program"
 
 if
@@ -160,7 +160,7 @@ then
 fi;
 
 if [ -z "$test_swapper_id" ]; then
-	export test_swapper_id=$(solana program deploy solana-program-library/target/deploy/spl_token_swap.so | grep -oP '(?<=Program Id\: ).*');
+	export test_swapper_id=$(solana program deploy solana-program-library/target/deploy/spl_token_swap.so | grep -o 'Program Id\: .*' | cut -b 13- );
 	echo "export test_swapper_id=$test_swapper_id" >> config;
 fi;
 

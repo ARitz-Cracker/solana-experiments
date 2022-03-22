@@ -19,5 +19,3 @@ main.js does the following:
 	* Along with its required accounts and intermediary token
 * Perform a swap between the 2 test accounts
 * Have a test account depoist and withdraw funds
-
-note: While start.sh should be compatible with standard `sh`, it depends on `grep -P`, which may not be available in all enviroments
