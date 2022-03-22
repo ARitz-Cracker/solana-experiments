@@ -16,16 +16,14 @@ then
 fi;
 
 echo "start.sh: Ensure required npm packages are available";
-if
-	! [ -d "node_modules" ] &&
-	! cd js &&
-	! npm install;
-then
-	echo "start.sh: npm failed";
-	exit 1;
+if ! [ -d "js/node_modules" ]; then
+	cd js;
+	if ! npm install; then
+		echo "start.sh: npm failed";
+		exit 1;
+	fi;
+	cd "$original_wd";
 fi;
-
-cd "$original_wd";
 
 # This script was writtin with the assumption that this wouldn't be inside a git repo.
 # Otherwise, I would have set up a submodule
